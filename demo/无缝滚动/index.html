@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>无缝滚动</title>
+		<style>
+			*{
+				margin: 0;padding: 0;list-style: none;
+			}
+			.box{
+				width: 1225px;
+				height: 200px;
+				border: 2px dotted purple;
+				margin: 100px auto;
+				position: relative;
+				overflow: hidden;
+			}
+			ul{
+				position: absolute;
+				width: 2450px;
+				height: 200px;
+				left:-1225px ;
+				float: left;
+				
+				
+			}
+			li {
+				float: left;
+				margin-left:5px;
+				width: 240px;
+				height: 200px;
+				overflow: hidden;
+			}
+			
+		</style>
+		<script>
+			window.onload = function(){
+					var ul = document.getElementById("li");
+				 function play(){
+				 	if(ul.offsetLeft<0){
+				 		ul.style.left = ul.offsetLeft+3+"px";
+				 	}else{
+				 		ul.style.left = -(ul.offsetWidth/2)+"px";
+				 	}
+				 	
+				 }
+				setInterval(function(){
+					play();
+				},10);
+				}
+				
+		</script>
+	</head>
+	<body>
+		<div class="box">
+			<ul id="li">
+				<li><img src="img/album1.jpg"/></li>
+				<li><img src="img/album2.jpg"/></li>
+				<li><img src="img/album3.jpg"/></li>
+				<li><img src="img/album4.jpg"/></li>
+				<li><img src="img/album5.jpg"/></li>
+				<li><img src="img/album1.jpg"/></li>
+				<li><img src="img/album2.jpg"/></li>
+				<li><img src="img/album3.jpg"/></li>
+				<li><img src="img/album4.jpg"/></li>
+				<li><img src="img/album5.jpg"/></li>
+			</ul>
+		</div>
+	</body>
+</html>

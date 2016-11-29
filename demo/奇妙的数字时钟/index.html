@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+	</head>
+	<style>
+		*{margin: 0px;padding: 0px;}
+		canvas{margin:50px auto;display:block;}
+	</style>
+	<body>
+		<canvas id="canvas" width="920px" height="400px">
+			您的浏览器不支持canvas，请您更换浏览器！
+		</canvas>
+	</body>
+	<script type="text/javascript">
+			var canvas = document.getElementById("canvas");
+			var context =canvas.getContext("2d");
+			var balls =[];
+			var u = 0.65;
+			var currentnums = [];
+			var w = canvas.width;
+			var h = canvas.height;
+			var padd = 10;
+			var radius=7;
+			//context.beginPath();
+			//context.arc(100,100,30,0,360,false);//x坐标，y坐标，半径，角度，false是逆时针
+			//context.closePath();
+			//context.strokeStyle="#FFFFFF";//线条的颜色
+			//context.stroke();//画线条
+			//context.fillStyle=color();
+			//context.fill();
+			function color(){
+				var _color = Math.ceil(Math.random()*16777215).toString(16);
+				if(_color.length <6){
+					_color+='0'+_color;
+				}
+				return "#"+_color;
+			}
+			var digit =
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0],
+            [0,0,0,0],
+            [0,1,1,0],
+            [0,1,1,0],
+            [0,0,0,0],
+            [0,0,0,0],
+            [0,1,1,0],
+            [0,1,1,0],
+            [0,0,0,0],
+            [0,0,0,0]
+        ]//:
+    ];
+    function drawDatetime(cxt){
+    	var nums=[];
+    	var offsetX=70;
+    	var offsetY=30;
+    	var date =new Date();
+    	var hours = date.getHours();
+    	var num1 = Math.floor(hours/10);
+    	var num2 = hours%10;
+    	nums.push({num:num1});
+    	nums.push({num:num2});
+    	nums.push({num:10});
+    	
+    	var min = date.getMinutes();
+    	var num1 = Math.floor(min/10);
+    	var num2 = min%10;
+    	nums.push({num:num1});
+    	nums.push({num:num2});
+    	nums.push({num:10});
+    	
+    	var sec = date.getSeconds();
+    	var num1 = Math.floor(sec/10);
+    	var num2 = sec%10;
+    	nums.push({num:num1});
+    	nums.push({num:num2});
+    	for(var x=0;x<nums.length;x++){
+    		nums[x].offsetX=offsetX;
+    		offsetX = drawNumber(offsetX,offsetY,nums[x].num,cxt);
+    		if(x<nums.length-1){
+    			if(nums[x].num!=10&&nums[x+1].num!=10){
+    				offsetX+=padd;
+    			}
+    		}
+    	}
+    	if(currentnums.length==0){
+    		currentnums = nums;
+    	}else{
+    		for(var i=0;i<currentnums.length;i++){
+    			if(currentnums[i].num!=nums[i].num){
+    				addballs(nums[i]);
+    				currentnums[i].num=nums[i].num;
+    		    }
+    	    }
+        }
+    	drawballs(cxt);
+    	moveballs();
+    	}
+    function drawNumber(offsetX,offsetY,num,cxt){
+    	var numMatrix = digit[num];
+    	context.fillStyle="red";
+    	for(var y=0;y<numMatrix.length;y++){
+    		for(var x=0;x<numMatrix[y].length;x++){
+    			if(numMatrix[y][x]==1){
+    				cxt.beginPath();
+    				cxt.arc(offsetX+radius+radius*2*x,offsetY+radius+radius*2*y,radius,0,360,false);
+    				cxt.fill();
+    			}
+    		}
+    	}
+    	offsetX+=numMatrix[0].length*radius*2;
+    		return offsetX;
+    	}
+    		function addballs(item){
+    			var num = item.num;
+    			var numMatrix = digit[num];
+    	
+    	    for(var y=0;y<numMatrix.length;y++){
+    		    for(var x=0;x<numMatrix[y].length;x++){
+    			   if(numMatrix[y][x]==1){
+    				
+    				var ball = {
+    					offsetX : item.offsetX+radius+radius*2*x,
+    					offsetY : 30+radius+radius*2*y,
+    					color : color(),
+    					sx : Math.pow(-1,Math.ceil(Math.random()*10))*4+Math.random(),
+    					sy : -8,
+    					g : 1.5+Math.random()
+    				}
+    				balls.push(ball);
+    			}
+    		}
+    		}
+    }
+        function drawballs(cxt){
+        	for(var i=0;i<balls.length;i++){
+        		cxt.beginPath();
+        		cxt.arc(balls[i].offsetX,balls[i].offsetY,radius,0,360,false);
+        		cxt.fillStyle = balls[i].color;
+        		cxt.fill();
+        	}
+        }
+        function moveballs(){
+        	var n=0;
+        	for(var i=0;i<balls.length;i++){
+        		var ball = balls[i];
+        		balls[i].offsetX+=balls[i].sx;
+        		balls[i].offsetY+=balls[i].sy;
+        		balls[i].sy+=balls[i].g;
+        		if(ball.offsetY>(h-radius)){
+        			ball.offsetY= h-radius;
+        			ball.sy = -ball.sy*u;
+        		}
+        		if(ball.offsetX>radius && ball.offsetX<(w-radius)){
+        			balls[n]=balls[i];
+        			n++;
+        		}
+        	}
+        	for(;n<balls.length;n++){
+        			balls.pop();
+        		}
+        }
+    setInterval(function(){
+    	context.clearRect(0,0,w,h);
+    	 drawDatetime(context);
+    },10);
+       
+	</script>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style>
+		*{margin: 0;padding: 0;}
+		body{background: black;}
+			#canvas{
+				background: url(img/525e93d2ef44baf78139a23e87e83944.gif);
+				margin: 100px auto;
+				display: block;/*将元素设置为块级元素*/
+				}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="500">
+			您的浏览器不支持，请您更新您的浏览器！！
+		</canvas>
+	</body>
+	<script type="text/javascript">
+	    
+			var canvas = document.getElementById('canvas');
+			var cxt = canvas.getContext('2d');//获取画布的2d环境
+			function clocks (){
+			cxt.strokeStyle="#0000FF";
+			cxt.lineWidth="10";
+			cxt.beginPath();
+			cxt.arc(250,250,200,0,360,false);
+			cxt.stroke();
+			cxt.closePath();
+			
+			for(var i=0;i<12;i++){
+				cxt.save();//保存原有画布
+				cxt.lineWidth="10";
+				cxt.strokeStyle="red";
+				cxt.translate(250,250);//转换画布的坐标系统
+				cxt.rotate(30*i*Math.PI/180);
+				cxt.beginPath();
+				cxt.moveTo(0,-170);
+				cxt.lineTo(0,-190);
+				cxt.stroke();
+				cxt.closePath();
+				cxt.restore();
+			}
+			
+			for(var i=0;i<60;i++){
+				cxt.save();//保存原有画布
+				cxt.lineWidth="10";
+				cxt.strokeStyle="#F0F8FF";
+				cxt.translate(250,250);//转换画布的坐标系统
+				cxt.beginPath();
+				cxt.rotate(6*i*Math.PI/180);
+				cxt.moveTo(0,-180);
+				cxt.lineTo(0,-190);
+				cxt.stroke();
+				cxt.closePath();
+				cxt.restore();
+			}
+			
+			var time = new Date();
+			var hours = time.getHours();
+			var mins = time.getMinutes();
+			var secs = time.getSeconds();
+			hours=hours+mins/60;
+			hours>12?hours-12:hours;
+			
+			cxt.save();
+			cxt.lineWidth="8";
+			cxt.strokeStyle="yellow";
+			cxt.translate(250,250);
+			cxt.rotate(hours*30*Math.PI/180);
+			cxt.beginPath();
+			cxt.moveTo(0,5);
+			cxt.lineTo(0,-100);
+			cxt.stroke();
+			cxt.closePath();
+			cxt.restore();
+			
+			cxt.save();
+			cxt.lineWidth="6";
+			cxt.strokeStyle="greenyellow";
+			cxt.translate(250,250);
+			cxt.rotate(mins*6*Math.PI/180);
+			cxt.beginPath();
+			cxt.moveTo(0,10);
+			cxt.lineTo(0,-140);
+			cxt.stroke();
+			cxt.closePath();
+			cxt.restore();
+			
+			cxt.save();
+			cxt.lineWidth="3";
+			cxt.strokeStyle="red";
+			cxt.fillStyle="#CCCCCC";
+			cxt.translate(250,250);
+			cxt.rotate(secs*6*Math.PI/180);
+			cxt.beginPath();
+			cxt.moveTo(0,15);
+			cxt.lineTo(0,-160);
+			cxt.stroke();
+			cxt.closePath();
+			cxt.beginPath()
+			cxt.arc(0,0,5,0,360,false);
+			cxt.fill();
+			cxt.stroke();
+			cxt.closePath();
+			cxt.beginPath();
+			cxt.arc(0,-130,5,0,360,false);
+			cxt.fill();
+			cxt.stroke();
+			cxt.closePath();
+			cxt.restore();
+			}
+			setInterval(function(){
+				cxt.clearRect(0,0,500,500);//清除画布的元素
+				clocks();
+			},1000);
+		</script>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.box{
+				width: 96px;
+				height: 48px;
+				background:white;
+				margin: 100px auto;
+				border-width: 2px 2px 50px 2px;
+				border-style: solid;
+				border-color: #000000;
+				border-radius: 100%;
+				position: relative;
+				animation: 4s play infinite linear;
+			}
+			@-webkit-keyframes play{
+				from{transform: rotate(0deg);}
+				to{transform: rotate(360deg);}
+			}
+			.box:before {
+				content: "";
+				position: absolute;
+				width: 12px;
+				height: 12px;
+				left: 0px;
+				top: 50%;
+				border-radius: 100%;
+				border: 18px solid #000000;
+				background: white;
+			}
+			.box:after {
+				content: "";
+				position: absolute;
+				width: 12px;
+				height: 12px;
+				right: 0px;
+				top: 50%;
+				border-radius: 100%;
+				border: 18px solid white;
+				background: #000000;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box"></div>
+	</body>
+</html>

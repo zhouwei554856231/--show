@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+		*{margin: 0;padding: 0;}
+		body{background: #333333;}
+		.trans {width: 1124px;height:486px;position: relative;overflow: hidden;}
+		.trans .pics ul li{list-style: none;}
+		.trans .cir ul{width: 50px;height: 10px;position:absolute;left: 0;right: 0;margin: 0 auto;bottom: 30px;}
+		.trans .cir ul li{list-style: none;width: 10px;height: 10px;background:purple;float: left;border-radius: 50%;margin: 5px;}
+		.trans .cir li.on{background: yellow;}
+		</style>
+		<script src="js/jquery.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				var $imgli = $('.trans .pics ul li');
+				var $cirli = $('.trans .cir ul li');
+				$cirli.click(function(){
+					var index = $(this).index();
+					//alert(index);
+				    $(this).addClass('on').siblings().removeClass('on');
+				    $imgli.eq(index).stop().fadeIn().siblings().stop().fadeOut();
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div class="trans">
+			<div class="pics">
+				<ul>
+					<li><img src="img/1.png"/></li>
+					<li style="display: none;"><img src="img/2.png"/></li>
+				</ul>
+			</div>
+			<div class="cir">
+				<ul>
+					<li class="on"></li>
+					<li></li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

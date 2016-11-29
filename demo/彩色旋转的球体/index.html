@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0px;padding: 0px;
+			}
+			body{
+			background:#333;
+		}
+			#ball{
+			width:500px;height:500px;
+			margin:100px auto;
+		}
+		.ball-cube{
+			width:500px;height:500px;transform-style:preserve-3d;/*3D环境*/
+			/*3D变换:旋转*/
+			transform:rotateZ(-20deg) rotateX(-20deg) rotateY(0deg);
+			animation:spin 20s linear infinite;/*自定义动画:名称 时间 匀速 无限重复*/
+		}
+		@keyframes spin{/*css3关键帧定义:执行上面的自定义动画*/
+			0%{transform:rotateZ(-20deg) rotateX(-20deg) rotateY(0deg);}
+			100%{transform:rotateZ(-20deg) rotateX(-20deg) rotateY(360deg);}
+		}
+		.ball-cube div{width:500px;height:500px;border:10px solid blue;
+		border-radius:100%;position:absolute;}
+		.ball-cube .x1{
+			transform:rotateY(0deg);/*3D变换:旋转*/
+		}
+		.ball-cube .x2{
+			transform:rotateY(20deg);/*3D变换:旋转*/
+		}
+		.ball-cube .x3{
+			transform:rotateY(40deg);/*3D变换:旋转*/
+		}
+		.ball-cube .x4{
+			transform:rotateY(60deg);/*3D变换:旋转*/
+		}
+		.ball-cube .x5{
+			transform:rotateY(80deg);/*3D变换:旋转*/
+		}
+		.ball-cube .x6{
+			transform:rotateY(100deg);/*3D变换:旋转*/
+		}
+		.ball-cube .x7{
+			transform:rotateY(120deg);/*3D变换:旋转*/
+		}
+		.ball-cube .x8{
+			transform:rotateY(140deg);/*3D变换:旋转*/
+		}
+		.ball-cube .x9{
+			transform:rotateY(160deg);/*3D变换:旋转*/
+		}
+		.ball-cube .y1{
+			transform:rotateX(90deg) translateZ(200px) scale(0.6);/*3D变换:旋转 位移 缩放*/
+		}
+		.ball-cube .y2{
+			transform:rotateX(90deg) translateZ(150px) scale(0.8);
+		}
+		.ball-cube .y3{
+			transform:rotateX(90deg) translateZ(100px) scale(0.92);
+		}
+		.ball-cube .y4{
+			transform:rotateX(90deg) translateZ(50px) scale(0.98);
+		}
+		.ball-cube .y5{
+			transform:rotateX(90deg) translateZ(0px) scale(1);
+		}
+		.ball-cube .y6{
+			transform:rotateX(90deg) translateZ(-50px) scale(0.98);
+		}
+		.ball-cube .y7{
+			transform:rotateX(90deg) translateZ(-100px) scale(0.92);
+		}
+		.ball-cube .y8{
+			transform:rotateX(90deg) translateZ(-150px) scale(0.8);
+		}
+		.ball-cube .y9{
+			transform:rotateX(90deg) translateZ(-200px) scale(0.6);
+		}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var oDiv = document.getElementsByClassName("ball-cube")[0];
+			var oDivs = oDiv.getElementsByTagName("div");
+			function auto(){
+				for (var i = 0;i<oDivs.length ;i++ )
+				{
+					oDivs[i].style.borderColor = color1();
+				}
+			}
+			setInterval(auto,1000);//定时器:一秒钟调用一次auto函数
+			//随即颜色 方法一：
+			function color1(){
+				var colors = [0,1,2,3,4,5,6,7,8,9,"a","b","c","d","e","f"];
+				var color = "";
+				for (var i = 0; i<6 ; i++)
+				{
+					var n = Math.ceil(Math.random()*15);//随机生成一个0-15之间的整数
+					color += colors[n];//color = color+colors[n]
+					//console.log(color);
+					if (i==5)
+					{
+						return "#"+color;
+					}
+				}
+			}
+			}
+		</script>
+	</head>
+	<body>
+	<div id="ball">
+			<div class="ball-cube">
+				<div class="x1"></div>
+				<div class="x2"></div>
+				<div class="x3"></div>
+				<div class="x4"></div>
+				<div class="x5"></div>
+				<div class="x6"></div>
+				<div class="x7"></div>
+				<div class="x8"></div>
+				<div class="x9"></div>
+				<div class="y1"></div>
+				<div class="y2"></div>
+				<div class="y3"></div>
+				<div class="y4"></div>
+				<div class="y5"></div>
+				<div class="y6"></div>
+				<div class="y7"></div>
+				<div class="y8"></div>
+				<div class="y9"></div>
+			</div>
+		</div>
+	</body>
+</html>

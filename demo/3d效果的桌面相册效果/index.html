@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style>
+	   *{
+	   	margin: 0px;
+	   	padding: 0px;
+	   }
+	   body{
+	   	background: black;
+	   }
+		#d1{
+			width: 100%;
+			height: 200px;
+			margin-top: 200px;
+			position: relative;
+			transform-style: preserve-3d;/*将二维空间转化为三维空间*/
+			perspective:880px;/*设置元素被查看位置的视图*/
+		}
+		
+		#d1 img{
+			width: 300px;
+			height: 200px;
+			position: absolute;
+			border-radius: 5px;/*图片的边角修饰*/
+			box-shadow: 0 0 5px white ;/*阴影  水平  垂直 扩散程度 颜色*/
+		    -webkit-box-reflect: below 5px -webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.7) 100%); 
+		    transition: 0.7s;/*动态时间*/
+		}
+		
+		#d1 img.left{
+			transform: rotateY(45deg) translateZ(-100px)/*45deg 是45度*/
+		}
+		#d1 img.middle{
+			transform: translateZ(100px)
+		}
+		#d1 img.right{
+			transform: rotateY(-45deg) translateZ(-100px)
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			var img =  document.getElementsByTagName('img');
+			var mindex = 5;//序列号从零开始
+			for(var i=0;i<img.length;i++){
+				img[i].index = i;
+				img[i].onclick = function(){
+					var nindex = this.index;
+					for(var j=0;j<img.length;j++){
+						img[j].style.left=img[j].offsetLeft -100*(nindex-mindex)+'px'; 
+						if(j<nindex){
+							img[j].className='left';
+						}else if(j==nindex){
+							img[j].className='middle';
+						}else{
+							img[j].className='right';
+						}
+					}
+					mindex = nindex;
+				}
+				
+			}
+		}
+	</script>
+	<body>
+		<div id="d1">
+			<img src="img/1.jpg" style="left: 34px;" class="left"/>
+			<img src="img/2.jpg" style="left: 134px;" class="left"/>
+			<img src="img/3.jpg" style="left: 234px;" class="left"/>
+			<img src="img/4.jpg" style="left: 334px;" class="left"/>
+			<img src="img/5.jpg" style="left: 434px;" class="left"/>
+			<img src="img/6.jpg" style="left: 534px;" class="middle"/>
+			<img src="img/7.jpg" style="left: 634px;" class="right"/>
+			<img src="img/8.jpg" style="left: 734px;" class="right"/>
+			<img src="img/9.jpg" style="left: 834px;" class="right"/>
+			<img src="img/10.jpg" style="left: 934px;" class="right"/>
+			<img src="img/11.jpg" style="left: 1034px;" class="right"/>
+		</div>
+	</body>
+</html>

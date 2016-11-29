@@ -1,0 +1,211 @@
+@charset 'utf-8';
+*{
+	margin: 0;
+	padding: 0;
+}
+html{
+	height:100%;
+	width:100%;
+}
+
+li{
+	list-style:none;
+}
+
+body{
+	width:100%;
+	height:100%;
+	position: fixed;
+	-webkit-perspective:800px; /*景深*/
+	-moz-perspective: 800px;
+}
+
+#wrap{
+	width:100%;
+	height:100%;
+	top:0px;
+	left:0px;
+	background:#023b3b url(../img/bg.png) no-repeat center;
+}
+
+#main{
+	width:0px;
+	height:0px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform-style:preserve-3d; /* 变换风格：3D */
+	-webkit-transform:translateZ(-2000px) rotateX(0deg) rotateY(0deg);
+	-moz-transform:translateZ(-2000px) rotateX(0deg) rotateY(0deg) ;
+	-ms-transform:translateZ(-2000px) rotateX(0deg) rotateY(0deg) ;
+	-o-transform: translateZ(-2000px) rotateX(0deg) rotateY(0deg);
+}
+
+#main li{
+	width:120px;
+	height:160px;
+	background:rgba(0,127,127,0.5);
+	border:1px solid rgba(127,255,255,0.25);
+	box-shadow:0 0 12px rgba(0,255,255,0.5);
+	cursor:pointer;
+	position:absolute;
+	top:-80px;
+	left:-60px;
+	transform:translateZ(0px);
+	-moz-transform:translateZ(0px);
+	transition:4s ease-in-out;
+	/*transform:translate(0px,0px); transform变换  translate变换里面的一种-位移 第一个值是水平偏移 第二个值是垂直偏移*/
+	font-family:'Microsoft yahei';
+	text-align:center;
+}
+#main li .title{
+	font-size:60px;
+	color:rgba(255,255,255,0.7);
+	margin-top:10px;
+	font-weight:bold;
+	text-shadow:0 0 20px rgba(0,255,255,0.5);
+}
+#main li .author,#main li .time{
+	font-size:60px;
+	margin-top:10px;
+	font-weight:bold;
+	text-shadow:0 0 20px rgba(0,255,255,0.5);
+	color:rgba(127,255,255,0.75);
+	font-size:14px;
+	text-shadow:0 0 5px rgba(0,255,255,0.5);
+}
+
+#main li:hover{
+	box-shadow:0 0 12px rgba(0,255,255,0.75);
+	border:1px solid rgba(127,255,255,0.75);
+}
+
+#styleBtn{
+	width:290px;
+	height:40px;
+	position:absolute;
+	bottom:15px;
+	left:15px;
+	transform:scale(1.5);
+	-moz-transform:scale(1.5);
+	opacity:0;
+	transition:1.5s;
+}
+
+#styleBtn li{
+	color:rgba(127,255,255,0.75);
+	border:1px solid rgba(127,255,255,0.75);
+	font-size:12px;
+	font-weight:bold;
+	font-family:'Microsoft yahei';
+	padding:8px 12px;
+	float:left;
+	cursor:pointer;
+	border-radius:3px;
+	margin:0 5px;
+}
+
+#styleBtn li:hover{
+	background:rgba(0,255,255,0.5);
+}
+
+#styleBtn li:active{
+	color:#000;
+}
+
+#back{
+	color:rgba(127,255,255,0.75);
+	border:1px solid rgba(127,255,255,0.75);
+	font-size:12px;
+	font-weight:bold;
+	font-family:'Microsoft yahei';
+	padding:8px 12px;
+	margin:0 5px;
+	cursor:pointer;
+	border-radius:3px;
+	position:absolute;
+	bottom:15px;
+	left:15px;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+#back:hover{
+	background:rgba(0,255,255,0.5);
+}
+
+#back:active{
+	color:#000;
+}
+
+#show{
+	width:80%;
+	height:80%;
+	position:absolute;
+	top:10%;
+	left:10%;
+	background:rgba(0,127,127,0.5);
+	border:1px solid rgba(127,255,255,0.25);
+	box-shadow:0 0 12px rgba(0,255,255,0.5);
+	border-radius:3px;
+	transform:rotateY(0deg) scale(1.5);
+	display:none;
+	transition:transform 1s;
+	-moz-transform:rotateY(0deg) scale(1.5) ;
+	font-family:'Microsoft yahei';
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+#show .s-title,#show .s-img,#show .s-author,#show .s-dec{
+	background:rgba(0,0,0,0.5);
+	border-radius:3px;
+	border:1px solid rgba(127,255,255,0.25);
+	box-shadow:0 0 12px rgba(0,255,255,0.5);
+}
+#show .s-title{
+	width:50%;
+	margin:3% auto 6%;
+	height:10%;
+}
+#show .s-title h1{color: white;display: inline-block;height:100%;text-align: center;margin-left: 2%;}
+#show .s-title h2{color: white;width: 80%;height: 80%;float: right;text-align:left;margin-top: 1%;}
+#show .s-img{
+	width:45%;
+	height:60%;
+	margin-left:5%;
+	float:left;
+	background-position: center;
+	background: url(../demo/3D drag/index.png);
+	background-size: 100% 100%;
+}
+#show .s-img img{
+	width: 100%;
+	height: 100%;
+	z-index: 5;
+}
+#show .s-author{
+	width:30%;
+	height:10%;
+	float:right;
+	margin-right:5%;
+	margin-top:4%;
+}
+
+#show .s-author h1{color: white;display: inline-block;height:100%;text-align: center;margin-left: 8%;font-size:31px;margin-top: 1%;}
+#show .s-author h2{color: white;width: 60%;height: 80%;float: right;text-align:left;margin-top: 1%;font-size: 30px;letter-spacing: 3px;}
+#show .s-dec{
+	width:30%;
+	height:30%;
+	float:right;
+	margin-right:5%;
+	margin-top:4%;
+	
+}
+#show .s-dec #date{width: 100%;height: 30%;color: white;font-size: 29px;}
+#show .s-dec #introd{width: 100%;height: 70%;font-size: 24px;color: white;}
+#frame{
+	background:#ff99ff;
+	display:none;
+	width:100%;
+	height:100%;
+	position:absolute;
+	left:100%;
+	top:0;
+}

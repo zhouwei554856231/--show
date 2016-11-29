@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+		*{margin: 0;padding: 0;}
+		
+			header{
+				height: 26px;
+				width: 1000px;
+				margin: 30px auto;
+				background: url(img/title.jpg) no-repeat;
+				border-bottom: 4px solid black;
+			}
+			header h2{
+				text-indent: 60px;
+				color: gold;
+				text-shadow: 3px 3px 1px yellow;
+			}
+			.banner{
+				width: 1000px;
+				height: 550px;
+				border: 1px solid purple;
+				margin: 0 auto;
+				position: relative;
+			}
+			.banner .choice{
+				width: 350px;
+				height: 400px;
+				position: absolute;
+				left: 0;
+				top: 50px;
+			}
+			.choice ul li{
+				font-family: "微软雅黑";
+				color:#F5F5F5;
+				width: 140px;
+				height: 45px;
+				background:url(img/sports.png) no-repeat;
+				background-position: -125px 0px;
+				list-style: none;
+				margin-bottom: 20px;
+			}
+			.choice ul li .tr{
+				width: 5px;
+				height: 40px;
+				background: #23c6c3;
+				float:left ;
+				margin-left: -5px;
+			}
+			.choice ul li h2{
+				font-size: 19px;
+				line-height: 20px;
+				padding-top: 12px;
+				padding-left: 8px;
+				float: left;
+			}
+			.choice ul li p{
+				font-size: 14px;
+				float: left;
+				transform: translate(130px,-57px);
+				opacity: 0;
+			}
+			.choice ul li.current{
+				width: 240px;
+			 	background-position: 0px -41px;
+			 	transition: .7s all;
+			}
+			.choice ul li.current p{
+				transform: translate(10px,18px);
+				transition: .7s all color;
+				opacity: 1;
+			}
+			.banner .pics .img1{width: 1000px;height: 550px;background: url(img/1.jpg) no-repeat;display: none;position: relative;}
+			.banner .pics .img2{width: 1000px;height: 550px;background: url(img/2.jpg) no-repeat;display: none;}
+			.banner .pics .img3{width: 1000px;height: 550px;background: url(img/3.jpg) no-repeat;display: none;}
+			.banner .pics .img4{width: 1000px;height: 550px;background: url(img/4.jpg) no-repeat;display: none;}
+			
+		</style>
+		<script src="../js/jquery.js"></script>
+		<script type="text/javascript">
+		$(function(){
+			$.each($('.choice ul li'),function(){
+					$(this).removeClass('current');
+				});
+			$('.choice ul li').mouseover(function(){
+			 $(this).addClass('current').siblings().removeClass('current');
+			 $(this).addClass('p1').siblings().removeClass('p1');
+			$('.pics div').eq($(this).index()).show().siblings().hide();
+			});
+				
+			
+		});
+		</script>
+	</head>
+	<body>
+		<header><h2>运动汇</h2></header>
+		<div class="banner">
+			<div class="pics">
+				<div class="img1" style="display: block;"></div>
+				<div class="img2"></div>
+				<div class="img3"></div>
+				<div class="img4"></div>
+			</div>
+			
+			
+			
+			
+			
+			<div class="choice">
+				<ul>
+					<li class="current">
+						<span class="tr"></span>
+						<h2>巴萨专区</h2>
+						<p class="p1">球星邀您动起来></p>
+					</li>
+					<li>
+						<span class="tr"></span>
+						<h2>瑜伽</h2>
+						<p>球星邀您动起来></p>
+					</li>
+					<li>
+						<span class="tr"></span>
+						<h2>健身</h2>
+						<p>球星邀您动起来></p>
+					</li>
+					<li>
+						<span class="tr"></span>
+						<h2>登山</h2>
+						<p>球星邀您动起来></p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>
